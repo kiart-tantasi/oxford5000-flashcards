@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    volumes:
+      - mysql-data-flashcards:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: mysqladmin --user=root --password=$$MYSQL_ROOT_PASSWORD ping
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - default
+    ports:
+      - 3306:3306
+
+volumes:
+  mysql-data-flashcards:
