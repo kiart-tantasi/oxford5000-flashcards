@@ -1,8 +1,8 @@
 USE flashcards;
 
-CREATE TABLE flashcards_oxford5000 (
+CREATE TABLE flashcards_oxford (
     id int primary key auto_increment,
-    word varchar(255)
+    word varchar(255) unique
 );
 
 CREATE TABLE users (
